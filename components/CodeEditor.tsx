@@ -125,7 +125,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ code, setCode }) => {
                 >
                     {isFormatting ? (
                          <>
-                            <svg className="animate-spin h-4 w-4" xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
@@ -133,7 +133,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ code, setCode }) => {
                         </>
                     ) : (
                         <>
-                            <svg xmlns="http://www.w.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                               <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l4 4m0 0l-4 4m4-4H7m-5 4v2a3 3 0 003 3h9a3 3 0 003-3V9m-4 8h4" />
                             </svg>
                             <span>Format Code</span>
@@ -148,7 +148,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ code, setCode }) => {
                     aria-hidden="true"
                 >
                     {Array.from({ length: lineCount }, (_, i) => (
-                        <div key={i} className={ i + 1 === currentLine ? 'text-blue-600 dark:text-blue-400 font-bold' : ''}>
+                        <div key={i} className={`leading-6 ${ i + 1 === currentLine ? 'text-blue-600 dark:text-blue-400 font-bold' : ''}`}>
                             {i + 1}
                         </div>
                     ))}
@@ -158,7 +158,9 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ code, setCode }) => {
                         aria-hidden="true"
                         className="absolute left-0 w-full bg-blue-100 dark:bg-blue-900/30 pointer-events-none transition-all duration-100 ease-out"
                         style={{
-                            top: `calc(${(currentLine - 1) * 1.5}rem)`,
+                            // The `top` is calculated based on the line height (1.5rem) and the editor's
+                            // top padding (1rem, from the `p-4` class which corresponds to the custom CSS).
+                            top: `calc(1rem + ${(currentLine - 1) * 1.5}rem)`,
                             height: '1.5rem',
                             zIndex: 0,
                         }}
